@@ -1,0 +1,39 @@
+<canvas id="tela" width="600" height="400"></canvas>
+
+<script>
+
+
+var tela = document.getElementById("tela");
+var c = tela.getContext("2d");
+
+c.fillStyle = "grey";
+c.fillRect(0, 0, 600, 400);
+
+var circulo = function(x, y, raio){
+	var tela = document.getElementById("tela");
+	var c = tela.getContext("2d");
+	
+	c.arc(x, y, raio, 0, 2 * Math.PI);
+	c.fill();
+}
+
+
+var cor = function(color){
+	c.fillStyle = color;
+	c.beginPath();
+}
+
+
+	
+var desenhaAlvo = function(x, y){
+	var raio = 40
+	cor("Red");
+	circulo(x,y, raio);
+	cor("White");
+	circulo(x, y, raio - 10);
+	cor("Red");
+	circulo(x, y, raio -20);
+	
+}
+
+</script>

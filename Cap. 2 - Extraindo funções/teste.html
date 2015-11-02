@@ -1,0 +1,15 @@
+<canvas id="tela" width="600" height="400"></canvas>
+
+<script>
+
+var desenhaCirculoAzul = function(x,y) {
+	var tela = document.getElementById("tela");
+	var c = tela.getContext("2d");
+	
+	c.fillStyle = "blue";
+	c.arc(x, y, 200, 0, 2 * 3,14);
+}
+
+desenhaCirculoAzul(50,50);
+
+</script>

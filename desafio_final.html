@@ -1,0 +1,76 @@
+<meta charset = "UTF-8">
+<canvas id="tela" width="600" height="400"></canvas>
+
+<script>
+
+var tela = document.getElementById("tela");
+var contexto = tela.getContext("2d");
+
+var cor = function(cor){
+	contexto.fillStyle = cor;
+};
+
+var circulo = function(x, y, raio) {
+	contexto.beginPath();
+	contexto.arc(x, y, raio, 0, 2 * Math.PI);
+	contexto.fill();
+};
+
+
+var desenhaAlvo = function(x, y) {
+    var raio = 40;
+    cor("white");
+    circulo(x, y, raio);
+    cor("red");
+    circulo(x, y, raio-10);
+    cor("white");
+    circulo(x, y, raio-20);
+    cor("red");
+    circulo(x, y, raio-30);
+};
+
+var limpa = function(){
+	contexto.clearRect(0, 0, 600, 400);
+};
+
+var sorteia = function(limite){
+	return Math.round(Math.random () * limite);
+};
+
+var alvoX;
+var alvoY;
+
+var desenha = function() {
+  limpa();
+  alvoX = sorteia(600);
+  alvoY = sorteia(400);
+  desenhaAlvo(alvoX, alvoY);
+};
+
+setInterval(desenha, 1000);
+
+var diferenca = function(a, b){
+	return Math.abs(a - b);
+}
+
+var dentroDoCirculo = function(x, y){
+	var raio = 40
+	if(diferenca(x, alvoX) <= raio) {
+		if(diferenca(y, alvoY) <= raio){
+			return true;
+		}		
+	}
+	return false;
+};
+
+
+var atira = function(evento){
+	var x = evento.pageX - tela.offsetLeft;
+	var y = evento.pageY - tela.offsetTop;
+	if(dentroDoCirculo(x, y)) {
+		alert("Você acertou!!!");
+	}
+};
+
+tela.onclick = atira;
+</script>
